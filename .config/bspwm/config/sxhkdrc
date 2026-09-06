@@ -1,0 +1,91 @@
+
+############################
+# ----- applications ----- #
+############################
+
+# ----- main apps ----- #
+
+# terminal
+super + Return
+    /usr/bin/kitty
+
+# app launcher
+super + @space
+	rofi -show run
+
+# firefox
+super + shift + f
+    /usr/bin/firefox
+
+# ----- your apps ----- #
+
+# file manager
+super + f
+    /usr/bin/thunar
+
+# pavucontrol
+super + p
+    /usr/bin/pavucontrol
+
+# whatsapp web
+super + w
+    /usr/bin/firefox -new-tab https://web.whatsapp.com/
+
+super + shift + s
+    /usr/bin/flameshot gui
+
+# ----- rofi applets ----- #
+
+
+
+# ----- environment apps ----- #
+
+# power off, reboot, logout, lockscreen
+ctrl + super + alt + {p,r,q,l}
+    {systemctl poweroff, systemctl reboot, bspc quit, i3lock -n}
+
+# hide/show bar (polybar)
+super + alt + {h,u}
+    HideBar {-h,-u}
+
+# manage brightness
+ctrl + super + alt + {up,down}
+    BRIGHTNESS
+
+#####################
+# ----- bspwm ----- #
+#####################
+
+# reload bspwm
+super + alt + r
+    bspc wm -r
+
+# close/kill node
+super + x
+    bspc node -{c,k}
+
+# reload sxhkd keybinds
+super + Escape
+    pkill -USR1 -x sxhkd; dunstify -u low -i ~/.config/bspwm/config/assets/reload.svg 'sxhkd' 'The configuration file has been reloaded successfully!'
+
+# ----- node states and flags ----- #
+
+# set the node state
+alt + {t,shift + t,a,f}
+    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# ----- focus/swap nodes ----- #
+
+# focus the node in the given direction
+super + {_,shift + }{Left,Down,Up,Right}
+    bspc node -{f,s} {west,south,north,east}
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+    bspc {desktop -f, node -d} '^{1-9,10}'
+
+# ----- multi operation functions ----- #
+
+# close all nodes in current desktop
+super + ctrl + x
+    bspc query -N -d | xargs -I id -n 1 bspc node id -c

@@ -1,0 +1,33 @@
+#! /bin/sh
+
+# workspaces (SPECIAL)
+
+bspc monitor -d I II III IV V VI VII VIII IX X
+
+bspc config border_width         0
+bspc config window_gap           5
+
+bspc config split_ratio          0.51
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+run() {
+	if ! pidof -q "$1"; then
+		"$@" &
+	fi
+}
+
+run xrandr --output Virtual-1 --mode "1920x1080"
+
+# launch sxhkd daemon
+run sxhkd -c "${HOME}"/.config/bspwm/config/sxhkdrc
+
+# set system vars for polybar
+"$HOME"/.config/bspwm/bin/setSysVars
+
+# load current theme
+"${HOME}"/.config/bspwm/bin/theme.sh
+
+# launch picom
+run picom
+

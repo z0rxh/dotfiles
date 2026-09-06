@@ -1,0 +1,80 @@
+#!/bin/sh
+
+CONFIG_FILE="$HOME/.config/bspwm/config/system.ini"
+SFILE="$HOME/.config/bspwm/config/.sys"
+
+# wait until the default route is up.
+# polls every 250ms for up to 5s, and still tolerates a slow NetworkManager start.
+waitForNetwork() {
+    i=0
+    while [ "$i" -lt 20 ]; do
+        ip route show default 2>/dev/null | grep -q default && return 0
+        i=$((i + 1))
+        sleep 0.25
+    done
+    return 1
+}
+
+# automatically rewrite CONFIG_FILE
+updateConfig() {
+    tmpfile=$(mktemp "${CONFIG_FILE}.XXXXXX") || return 1
+    awk -v net="$1" -v card="$2" -v bat="$3" -v adap="$4" \
+        -v do_net="$5" -v do_static="$6" '
+        do_net == "1" && /^sys_network_interface =/ { $0 = "sys_network_interface = " net }
+        do_static == "1" && /^sys_graphics_card =/   { $0 = "sys_graphics_card = " card }
+        do_static == "1" && /^sys_battery =/          { $0 = "sys_battery = " bat }
+        do_static == "1" && /^sys_adapter =/          { $0 = "sys_adapter = " adap }
+        { print }
+    ' "$CONFIG_FILE" > "$tmpfile" && mv "$tmpfile" "$CONFIG_FILE"
+}
+
+detectNetwork() {
+    # uses the default route's interface instead of "first UP link",
+    # on boxes with both ethernet and wifi up, this follows whichever
+    # one the kernel would actually route through (best metric).
+    ip route show default 2>/dev/null | awk '{print $5; exit}'
+}
+
+detectGraphicsCard() {
+    for entry in /sys/class/backlight/*; do
+        [ -d "$entry" ] && { basename "$entry"; return; }
+    done
+    printf '%s' ""
+}
+
+detectBattery() {
+    for entry in /sys/class/power_supply/*; do
+        entry_name=$(basename "$entry")
+        case "$entry_name" in
+            *BAT*) printf '%s' "$entry_name"; return ;;
+        esac
+    done
+    printf '%s' ""
+}
+
+detectAdapter() {
+    for entry in /sys/class/power_supply/*; do
+        entry_name=$(basename "$entry")
+        case "$entry_name" in
+            *AC*|*ADP*) printf '%s' "$entry_name"; return ;;
+        esac
+    done
+    printf '%s' ""
+}
+
+# main execution
+wait_for_network
+primary_net=$(detectNetwork)
+
+if [ -f "$SFILE" ]; then
+    # hardware already cached: only refresh the network interface.
+    update_config "$primary_net" "" "" "" 1 0
+else
+    # first run ever: detect everything and lock the static part.
+    card=$(detectGraphicsCard)
+    battery=$(detectBattery)
+    adapter=$(detectAdapter)
+    if update_config "$primary_net" "$card" "$battery" "$adapter" 1 1; then
+        touch "$SFILE"
+    fi
+fi
