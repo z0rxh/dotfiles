@@ -35,4 +35,4 @@ map ctrl+shift+t new_tab_with_cwd
 map ctrl+shift+s search_scrollback
 
 shell zsh
-#shell_integration no-cursor
+shell_integration no-cursor

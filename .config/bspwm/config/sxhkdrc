@@ -71,8 +71,8 @@ super + Escape
 # ----- node states and flags ----- #
 
 # set the node state
-alt + {t,shift + t,a,f}
-    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+alt + {t,shift + t,a}
+    bspc node -t {tiled,pseudo_tiled,floating}
 
 # ----- focus/swap nodes ----- #
 

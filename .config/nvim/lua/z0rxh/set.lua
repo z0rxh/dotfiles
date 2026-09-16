@@ -1,4 +1,19 @@
--- vim.opt.guicursor = ""
+vim.api.nvim_set_hl(0, "NormalCursor", {
+  fg = "#000000",
+  bg = "#f7de3a",
+})
+
+vim.api.nvim_set_hl(0, "InsertCursor", {
+  fg = "#000000",
+  bg = "#ff0000",
+})
+
+-- vim.opt.guicursor = {
+--   "n-v-c:block-NormalCursor",
+--   "i-ci:block-NormalCursor",
+--   "r-cr:block-NormalCursor",
+--   "o:block-NormalCursor",
+-- }
 
 vim.wo.number = true
 vim.wo.relativenumber = true
@@ -23,9 +38,14 @@ vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
 
--- netrw
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3
-vim.g.netrw_browse_split = 4
-vim.g.netrw_altv = 1
-vim.g.netrw_winsize = 25
+vim.opt.wrap = true
+
+vim.opt.clipboard = "unnamedplus"
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+  end,
+  desc = "Disable auto comment on new line",
+})

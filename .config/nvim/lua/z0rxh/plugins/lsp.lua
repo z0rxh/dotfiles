@@ -38,6 +38,7 @@ return {
                 "asm_lsp",
                 "pyright",
                 "markdown_oxide",
+                "clangd",
             },
             handlers = {
                 function(server_name) -- default handler (optional)

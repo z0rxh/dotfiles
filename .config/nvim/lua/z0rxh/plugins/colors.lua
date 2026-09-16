@@ -36,6 +36,10 @@ return {
     },
 
     {
+        "thesignumt/gruber-darker.nvim"
+    },
+
+    {
         "rose-pine/neovim",
         name = "rose-pine",
         config = function()
@@ -46,7 +50,7 @@ return {
                 },
             })
 
-            colormypencils("kanagawa")
+            colormypencils("gruber-darker")
         end
     },
 }
