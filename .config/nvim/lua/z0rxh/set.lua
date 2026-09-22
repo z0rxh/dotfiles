@@ -23,7 +23,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
-vim.opt.smartindent = true
+vim.opt.smartindent = false
 
 vim.opt.wrap = false
 
@@ -38,8 +38,6 @@ vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
 
-vim.opt.wrap = true
-
 vim.opt.clipboard = "unnamedplus"
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -48,4 +46,26 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.formatoptions:remove({ "c", "r", "o" })
   end,
   desc = "Disable auto comment on new line",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "c", "cpp", "java", "javascript", "typescript", "json", "rust" },
+  callback = function()
+    vim.opt_local.cindent = true
+    vim.opt_local.cinkeys = "0{,0},:,0#,!<Tab>,!^F"
+  end,
+  desc = "Emacs-like TAB reindent for C-like files",
+})
+
+-- Python / Rust: indentexpr (do NOT enable cindent)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "python", "rust" },
+  callback = function()
+    vim.opt_local.cindent = false
+    vim.opt_local.smartindent = false
+    -- !<Tab> = Tab reindents the line instead of inserting spaces
+    -- !^F   = Ctrl-F also reindents (Neovim default)
+    vim.opt_local.indentkeys = "0{,0},:,0#,!<Tab>,!^F,o,O,e"
+  end,
+  desc = "Emacs-like TAB reindent (Python/Rust)",
 })

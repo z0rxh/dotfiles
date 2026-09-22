@@ -1,0 +1,95 @@
+{
+  "theme": "gruber-darker.json",
+  
+  "editor": {
+    "line_numbers": true,
+    "relative_line_numbers": true,
+    
+    "line_wrap": true,
+    "scroll_offset": 8,
+    "tab_size": 4,
+    "auto_indent": true,
+    
+    "syntax_highlighting": true,
+    "highlight_current_line": false,
+    "rainbow_brackets": false,
+    "highlight_occurrences": false,
+        
+    "cursor_jump_animation": false,
+    "cursor_style": "steady_bar",
+    
+    "show_menu_bar": false,
+    "set_window_title": true,
+    "nerd_font_icons": true,
+    "show_tab_bar": false,
+    
+    "diagnostics_inline_text": true,
+    "enable_inlay_hints": true,
+    
+    "auto_save_enabled": false,
+  },
+  
+  "file_explorer": {
+      "respect_gitignore": true,
+      "show_hidden": true,
+      "show_gitignored": true,
+  },
+  
+  "lsp": {
+      "rust": {
+          "command": "",
+          "args": [],
+          "enabled": true,
+          "auto_start": true,
+          "process_limits": {
+              "max_memory_percent": 50,
+              "max_cpu_percent": 90,
+              "enabled": true,
+          },
+      },
+      "markdown": {
+          "enabled": true,
+          "auto_start": true,
+          "process_limits": {
+              "max_memory_percent": 50,
+              "max_cpu_percent": 90,
+              "enabled": true
+          }
+      }
+  },
+  
+  "plugins": {
+    "git_explorer": {
+      "settings": {
+        "colorNames": true,
+      },
+      "enabled": true,
+    },
+    "vi_mode": {
+      "enabled": false,
+      "settings": {
+        "autoStart": false,
+        "arrowKeys": true,
+        "searchWordUnderCursor": true,
+      },
+      "path": "/home/z0rxh/.cache/fresh/embedded-plugins/9f192362a6507955/vi_mode.ts",
+    },
+    "welcome_screen": {
+      "enabled": false,
+      "settings": {
+        "showOnStartup": true,
+      },
+      "path": "/home/z0rxh/.cache/fresh/embedded-plugins/9f192362a6507955/welcome_screen.ts",
+    },
+    "welcome": {
+      "path": "/home/z0rxh/.cache/fresh/embedded-plugins/9f192362a6507955/welcome.ts",
+      "enabled": false,
+    },
+    "dashboard": {
+      "settings": {
+        "autoOpen": true,
+      },
+    },
+  },
+  "version": 2,
+}

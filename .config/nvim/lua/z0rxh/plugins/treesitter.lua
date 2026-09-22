@@ -16,6 +16,7 @@ return {
 				"css",
 				"json",
 				"gitignore",
+                "rust",
 				"go",
                 "markdown",
                 "markdown_inline",

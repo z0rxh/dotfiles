@@ -4,3 +4,4 @@ vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { desc = 'Toggle file ex
 vim.keymap.set({ "n", "v" }, "<leader>f", function()
     vim.lsp.buf.format({ async = true })
 end, { desc = "Format buffer" })
+

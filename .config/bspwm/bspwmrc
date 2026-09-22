@@ -41,5 +41,10 @@ run feh --bg-fill /home/z0rxh/desktop/z0rxh/wallpapers/sword_women.jpg
 # launch picom
 run picom
 
+# Never close the active monitors for inactivity
+run xset s off
+run xset -dpms
+run xset s noblank
+
 # Spanish keyboard layout
 run setxkbmap es

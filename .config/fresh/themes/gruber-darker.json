@@ -1,0 +1,65 @@
+{
+  "name": "gruber-darker",
+
+  "editor": {
+    "bg": [24, 24, 24],
+    "fg": [228, 228, 239],
+    "cursor": [255, 221, 51],
+    "inactive_cursor": [82, 73, 78],
+    "selection_bg": [72, 72, 72],
+    "current_line_bg": [40, 40, 40],
+    "line_number_fg": [82, 73, 78],
+    "line_number_bg": [24, 24, 24],
+    "line_number_current_fg": [255, 221, 51],
+    "whitespace_indicator_fg": [40, 40, 40],
+    "after_eof_bg": [24, 24, 24]
+  },
+
+  "ui": {
+    "tab_active_fg": [255, 221, 51],
+    "tab_active_bg": [24, 24, 24],
+    "tab_inactive_fg": [149, 169, 159],
+    "tab_inactive_bg": [40, 40, 40],
+    "status_bar_fg": [255, 255, 255],
+    "status_bar_bg": [40, 40, 40],
+    "menu_bg": [40, 40, 40],
+    "menu_fg": [228, 228, 239],
+    "menu_highlight_bg": [16, 16, 16],
+    "menu_highlight_fg": [228, 228, 239],
+    "popup_bg": [40, 40, 40],
+    "popup_text_fg": [228, 228, 239],
+    "popup_selection_bg": [16, 16, 16],
+    "popup_selection_fg": [228, 228, 239],
+    "prompt_fg": [150, 166, 200],
+    "prompt_bg": [24, 24, 24]
+  },
+
+  "search": {
+    "match_bg": [82, 73, 78],
+    "match_fg": [244, 244, 255],
+    "current_match_bg": [245, 245, 245],
+    "current_match_fg": [0, 0, 0]
+  },
+
+  "diagnostic": {
+    "error_fg": [244, 56, 65],
+    "warning_fg": [255, 221, 51],
+    "info_fg": [115, 201, 54],
+    "hint_fg": [149, 169, 159]
+  },
+
+  "syntax": {
+    "keyword": { "color": [255, 221, 51], "modifier": ["bold"] },
+    "operator": [255, 255, 255],
+    "comment": [204, 140, 60],
+    "string": [115, 201, 54],
+    "punctuation_delimiter": [228, 228, 239],
+    "number": [149, 169, 159],
+    "function": [228, 228, 239],
+    "variable": [244, 244, 255],
+    "punctuation_bracket": [228, 228, 239],
+    "constant": [149, 169, 159],
+    "type": [149, 169, 159],
+    "link": [150, 166, 200]
+  }
+}
