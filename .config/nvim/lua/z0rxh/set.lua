@@ -18,6 +18,9 @@ vim.api.nvim_set_hl(0, "InsertCursor", {
 vim.wo.number = true
 vim.wo.relativenumber = true
 
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
+
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -48,24 +51,10 @@ vim.api.nvim_create_autocmd("FileType", {
   desc = "Disable auto comment on new line",
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "c", "cpp", "java", "javascript", "typescript", "json", "rust" },
-  callback = function()
-    vim.opt_local.cindent = true
-    vim.opt_local.cinkeys = "0{,0},:,0#,!<Tab>,!^F"
-  end,
-  desc = "Emacs-like TAB reindent for C-like files",
-})
-
--- Python / Rust: indentexpr (do NOT enable cindent)
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "python", "rust" },
-  callback = function()
-    vim.opt_local.cindent = false
-    vim.opt_local.smartindent = false
-    -- !<Tab> = Tab reindents the line instead of inserting spaces
-    -- !^F   = Ctrl-F also reindents (Neovim default)
-    vim.opt_local.indentkeys = "0{,0},:,0#,!<Tab>,!^F,o,O,e"
-  end,
-  desc = "Emacs-like TAB reindent (Python/Rust)",
-})
+vim.opt.list = false
+vim.opt.listchars = {
+    space = "·",
+    trail = '•',
+    tab = '» ', 
+    nbsp = '␣',
+}

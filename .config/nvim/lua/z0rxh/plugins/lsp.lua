@@ -33,8 +33,7 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
-                "gopls",
-                "zls",
+                "texlab",
                 "asm_lsp",
                 "pyright",
                 "markdown_oxide",
@@ -51,13 +50,6 @@ return {
                     local lspconfig = require("lspconfig")
                     lspconfig.zls.setup({
                         root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
-                        settings = {
-                            zls = {
-                                enable_inlay_hints = true,
-                                enable_snippets = true,
-                                warn_style = true,
-                            },
-                        },
                     })
                     vim.g.zig_fmt_parse_errors = 0
                     vim.g.zig_fmt_autosave = 0
@@ -153,16 +145,23 @@ return {
             })
         })
 
-        vim.diagnostic.config({
-            -- update_in_insert = true,
-            float = {
-                focusable = false,
-                style = "minimal",
-                border = "rounded",
-                source = "always",
-                header = "",
-                prefix = "",
-            },
+        vim.diagnostic.config ({
+            virtual_text = false,
+            signs = false,
+            underline = false,
+            update_in_insert = false,
+            float = false,
         })
+        -- vim.diagnostic.config({
+        --     -- update_in_insert = true,
+        --     float = {
+        --         focusable = false,
+        --         style = "minimal",
+        --         border = "rounded",
+        --         source = "always",
+        --         header = "",
+        --         prefix = "",
+        --     },
+        -- })
     end
 }
